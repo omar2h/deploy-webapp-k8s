@@ -27,5 +27,14 @@ services:
     volumes:
       - tasks:/app/tasks:rw
 
+  frontend:
+    build:
+      context: .
+      dockerfile: dockerfiles/frontend.dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./env/frontend.env
+
 volumes:
   tasks:
