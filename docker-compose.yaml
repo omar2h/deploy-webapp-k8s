@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  users:
+    build:
+      context: .
+      dockerfile: dockerfiles/users.dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./env/users.env
+  auth:
+    build:
+      context: .
+      dockerfile: dockerfiles/auth.dockerfile
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./env/auth.env
