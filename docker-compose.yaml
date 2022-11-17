@@ -16,3 +16,16 @@ services:
       - "5000:5000"
     env_file:
       - ./env/auth.env
+  tasks:
+    build:
+      context: .
+      dockerfile: dockerfiles/tasks.dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./env/tasks.env
+    volumes:
+      - tasks:/app/tasks:rw
+
+volumes:
+  tasks:
