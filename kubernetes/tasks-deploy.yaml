@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tasks
+  template:
+    metadata:
+      labels:
+        app: tasks
+    spec:
+      containers:
+        - name: tasks
+          image: omarh2/kub-app-tasks:latest
+          env:
+            - name: AUTH_ADDRESS
+              value: "auth-service.default"
+            - name: TASKS_FOLDER
+              value: "tasks"
+            - name: PORT
+              value: "8000"
+          volumeMounts:
+            - mountPath: /app/tasks
+              name: tasks-pv
+      volumes:
+        - name: tasks-pv
+          persistentVolumeClaim:
+            claimName: tasks-pvc

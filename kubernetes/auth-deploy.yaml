@@ -16,3 +16,6 @@ spec:
         - name: auth
           image: omarh2/kub-app-auth:latest
           imagePullPolicy: Always
+          env:
+            - name: PORT
+              value: "80"
